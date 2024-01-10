@@ -1,0 +1,8 @@
+{
+  "id": "note-encryptor",
+  "name": "Note Encryptor",
+  "version": "0.1.2",
+  "author": "Joue Quroi",
+  "description": "Obsidian plugin to encrypt notes using native encryption algorithm",
+  "manifest": "main.js"
+}
