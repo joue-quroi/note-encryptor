@@ -221,34 +221,41 @@ class EncryptionPlugin extends Plugin {
     });
 
     // pretend ".enc" to be ".md" for search
-    this.app.vault.getFiles = new Proxy(this.app.vault.getFiles, {
-      apply(target, self, args) {
-        const {stack} = new Error();
-        const r = Reflect.apply(target, self, args);
-        if (stack.includes('.startSearch')) {
-          for (const file of r) {
-            if (file.extension === extension) {
-              file.extension = 'md';
-            }
-          }
-          return r;
-        }
-        else {
-          return r;
-        }
-      }
-    });
+    // this.app.vault.getFiles = new Proxy(this.app.vault.getFiles, {
+    //   apply(target, self, args) {
+    //     const {stack} = new Error();
+    //     const r = Reflect.apply(target, self, args);
 
-    // change format from md to enc for new file creation
-    this.app.fileManager.fileParentCreatorByType[extension] = this.app.fileManager.fileParentCreatorByType.md;
-    this.app.fileManager.createNewFile = new Proxy(this.app.fileManager.createNewFile, {
-      apply(target, self, args) {
-        if (args[2] === 'md') {
-          args[2] = extension;
-        }
-        return Reflect.apply(target, self, args);
-      }
-    });
+    //     if (stack.includes('.startSearch') && stack.includes('at c')) {
+    //       for (const file of r) {
+    //         if (file.extension === extension) {
+    //           Object.defineProperty(file, 'extension', {
+    //             get() {
+    //               console.log(stack);
+    //               console.log(this, this.constructor, this.constructor.constructor);
+    //               return extension;
+    //             }
+    //           });
+    //         }
+    //       }
+    //       return r;
+    //     }
+    //     else {
+    //       return r;
+    //     }
+    //   }
+    // });
+
+    // // change format from md to enc for new file creation
+    // this.app.fileManager.fileParentCreatorByType[extension] = this.app.fileManager.fileParentCreatorByType.md;
+    // this.app.fileManager.createNewFile = new Proxy(this.app.fileManager.createNewFile, {
+    //   apply(target, self, args) {
+    //     if (args[2] === 'md') {
+    //       args[2] = extension;
+    //     }
+    //     return Reflect.apply(target, self, args);
+    //   }
+    // });
   }
 }
 
