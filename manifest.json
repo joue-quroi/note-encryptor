@@ -3,6 +3,6 @@
   "name": "Note Encryptor",
   "version": "0.1.2",
   "author": "Joue Quroi",
-  "description": "Encrypt entire notes using native encryption (AES-GCM SHA-512) algorithm.",
+  "description": "Encrypt entire notes using native encryption (AES, SHA-512) algorithm.",
   "manifest": "main.js"
 }
